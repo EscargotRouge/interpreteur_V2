@@ -4,6 +4,13 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>ArbreAbstrait.h</itemPath>
+      <itemPath>Exceptions.h</itemPath>
+      <itemPath>Interpreteur.h</itemPath>
+      <itemPath>Lecteur.h</itemPath>
+      <itemPath>Symbole.h</itemPath>
+      <itemPath>SymboleValue.h</itemPath>
+      <itemPath>TableSymboles.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -12,6 +19,13 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>ArbreAbstrait.cpp</itemPath>
+      <itemPath>Interpreteur.cpp</itemPath>
+      <itemPath>Lecteur.cpp</itemPath>
+      <itemPath>Symbole.cpp</itemPath>
+      <itemPath>SymboleValue.cpp</itemPath>
+      <itemPath>TableSymboles.cpp</itemPath>
+      <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -24,20 +38,6 @@
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>M3105-TP5-Makefile.mk</itemPath>
     </logicalFolder>
-    <itemPath>ArbreAbstrait.cpp</itemPath>
-    <itemPath>ArbreAbstrait.h</itemPath>
-    <itemPath>Exceptions.h</itemPath>
-    <itemPath>Interpreteur.cpp</itemPath>
-    <itemPath>Interpreteur.h</itemPath>
-    <itemPath>Lecteur.cpp</itemPath>
-    <itemPath>Lecteur.h</itemPath>
-    <itemPath>Symbole.cpp</itemPath>
-    <itemPath>Symbole.h</itemPath>
-    <itemPath>SymboleValue.cpp</itemPath>
-    <itemPath>SymboleValue.h</itemPath>
-    <itemPath>TableSymboles.cpp</itemPath>
-    <itemPath>TableSymboles.h</itemPath>
-    <itemPath>main.cpp</itemPath>
     <itemPath>motsCles.txt</itemPath>
     <itemPath>programme.txt</itemPath>
     <itemPath>tp05.pdf</itemPath>
