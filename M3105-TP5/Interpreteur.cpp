@@ -130,17 +130,6 @@ Noeud* Interpreteur::facteur() {
     return fact;
 }
 
-//Noeud* Interpreteur::instSi() {
-//    // <instSi> ::= si ( <expression> ) <seqInst> finsi
-//    testerEtAvancer("si");
-//    testerEtAvancer("(");
-//    Noeud* condition = expression(); // On mémorise la condition
-//    testerEtAvancer(")");
-//    Noeud* sequence = seqInst(); // On mémorise la séquence d'instruction
-//    testerEtAvancer("finsi");
-//    return new NoeudInstSi(condition, sequence); // Et on renvoie un noeud Instruction Si
-//}
-
 
 Noeud* Interpreteur::instSiRiche() {
     // <instSiRiche> ::= si (<expression>) <seqInst> { sinonsi (<expression>) <seqInst> } [sinon <seqInst>] finsi
