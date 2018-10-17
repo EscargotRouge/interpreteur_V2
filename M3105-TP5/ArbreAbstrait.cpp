@@ -68,14 +68,30 @@ int NoeudOperateurBinaire::executer() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// NoeudInstSi
+// NoeudInstSiRiche
 ////////////////////////////////////////////////////////////////////////////////
 
-NoeudInstSi::NoeudInstSi(Noeud* condition, Noeud* sequence)
+NoeudInstSiRiche::NoeudInstSiRiche(Noeud* condition, Noeud* sequence)
 : m_condition(condition), m_sequence(sequence) {
 }
 
-int NoeudInstSi::executer() {
+int NoeudInstSiRiche::executer() {
   if (m_condition->executer()) m_sequence->executer();
   return 0; // La valeur renvoyée ne représente rien !
 }
+
+
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstTantQue
+////////////////////////////////////////////////////////////////////////////////
+
+NoeudInstTantQue::NoeudInstTantQue(Noeud* condition, Noeud* sequence)
+: m_condition(condition), m_sequence(sequence) {
+}
+
+int NoeudInstTantQue::executer() {
+  if (m_condition->executer()) m_sequence->executer();
+  return 0; // La valeur renvoyée ne représente rien !
+}
+
+

@@ -5,5 +5,43 @@ procedure principale()
   si (i>14)
     j=1;
   finsi
+
+#test avec si, sinonsi et sinon
+  si (i>14)
+    x1=1;
+  sinonsi(i<14)
+    x2=2;
+  sinon
+    x3=3;
+  finsi
+    
+#test avec que si et sinon
+  si (i>14)
+    y1=105;
+  sinon
+    y2=106;
+  finsi 
+
+# test avec plein de sinonsi
+  si (i>14)
+    z1=1;
+  sinonsi(i<14)
+    z21=21;
+    sinonsi(i<13)
+    z22=22;
+    sinonsi(i<12)
+    z23=23;
+  sinon
+    z3=3;
+  finsi  
+
+
+
+  #commentaire dans code
+    tantque (i>8)
+        k=5;
+        i=1;
+    fintantque
+
 finproc
 # Commentaire Final
