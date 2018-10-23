@@ -71,15 +71,14 @@ class NoeudInstSiRiche : public Noeud {
 // Classe pour représenter un noeud "instruction si"
 //  et ses 2 fils : la condition du si et la séquence d'instruction associée
   public:
-    NoeudInstSiRiche(Noeud* condition, Noeud* sequenceVraie, Noeud* sequenceFausse);
+    NoeudInstSiRiche(Noeud* condition, Noeud* sequence);
      // Construit une "instruction si" avec sa condition et sa séquence d'instruction
    ~NoeudInstSiRiche() {} // A cause du destructeur virtuel de la classe Noeud
     int executer();  // Exécute l'instruction si : si condition vraie on exécute la séquence
 
   private:
     Noeud*  m_condition;
-    Noeud*  m_sequenceVraie;
-    Noeud*  m_sequenceFausse;
+    Noeud*  m_sequence;
 };
 
 ////////////////////////////////////////////////////////////////////////////////

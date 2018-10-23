@@ -71,26 +71,20 @@ int NoeudOperateurBinaire::executer() {
 // NoeudInstSiRiche
 ////////////////////////////////////////////////////////////////////////////////
 
-NoeudInstSiRiche::NoeudInstSiRiche(Noeud* condition, Noeud* sequenceVraie, Noeud* sequenceFausse)
-: m_condition(condition), m_sequenceVraie(sequenceVraie), m_sequenceFausse(sequenceFausse) {
+NoeudInstSiRiche::NoeudInstSiRiche(Noeud* condition, Noeud* sequence)
+: m_condition(condition), m_sequence(sequence){
 }
 
 int NoeudInstSiRiche::executer() {
-    
+
     if (m_condition->executer()) {
         m_sequenceVraie->executer();
-    } else {
-        if
-                m_sequence->executer();
-    }    
-    
-    
-    if (m_condition->executer()) {
-		m_sequenceVraie->executer();
-	} else {
-		if (m_sequenceFausse != NULL) m_sequenceFausse->executer();
-	}
-    
+    } else {
+        if (m_sequenceFausse != nullptr) {
+            m_sequenceFausse->executer();
+        }
+    }
+
     return 0; // La valeur renvoyée ne représente rien !
 }
 
