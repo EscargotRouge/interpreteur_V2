@@ -3,50 +3,6 @@
 procedure principale()
 
 
-  i = 12+3;
-
-# test avec un si tout seul  
-  si (i>14)
-    j=1;
-  finsi
-
-#test avec si, sinonsi et sinon
-  si (i>14)
-    x1=1;
-  sinonsi(i<14)
-    x2=2;
-  sinon
-    x3=3;
-  finsi
-    
-#test avec que si et sinon
-  si (i>14)
-    y1=105;
-  sinon
-    y2=106;
-  finsi 
-
-# test avec plein de sinonsi
-  si (i>14)
-    z1=1;
-  sinonsi(i<14)
-    z21=21;
-  sinonsi(i<14)
-    z22=22;
-  sinonsi(i<12)
-    z23=23;
-  sinon
-    z3=3;
-  finsi
-
-# test avec un sinon avant le sinonsi tout seul - test unitaire
-#  si (i>14)
-#    z1=1;
-#  sinon
-#    z3=3;
-#  sinonsi(i<14)
-#    z21=21;
-#  finsi
 
 
 # test tantque

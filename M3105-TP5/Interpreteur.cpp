@@ -1,6 +1,7 @@
 #include "Interpreteur.h"
 #include <stdlib.h>
 #include <iostream>
+#include <vector>
 using namespace std;
 
 Interpreteur::Interpreteur(ifstream & fichier) :
@@ -138,8 +139,8 @@ Noeud* Interpreteur::facteur() {
 Noeud* Interpreteur::instSiRiche() {
     // <instSiRiche> ::= si (<expression>) <seqInst> { sinonsi (<expression>) <seqInst> } [sinon <seqInst>] finsi
 
-    vector vCond;
-    vector vSeq;
+    vector<Noeud*> vCond;
+    vector<Noeud*> vSeq;
 
     testerEtAvancer("si");
     testerEtAvancer("(");
@@ -153,9 +154,9 @@ Noeud* Interpreteur::instSiRiche() {
 
 
     while (m_lecteur.getSymbole() == "sinonsi") {
-        testerEtAvancer("sinonsi");
         m_lecteur.avancer();
         testerEtAvancer("(");
+        
         Noeud* condition = expression(); // On mémorise la condition
         vCond.push_back(condition);
         testerEtAvancer(")");

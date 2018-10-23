@@ -40,6 +40,7 @@
     </logicalFolder>
     <itemPath>motsCles.txt</itemPath>
     <itemPath>programme.txt</itemPath>
+    <itemPath>testSI.txt</itemPath>
     <itemPath>tp05.pdf</itemPath>
   </logicalFolder>
   <projectmakefile>M3105-TP5-Makefile.mk</projectmakefile>
@@ -83,6 +84,8 @@
       <item path="motsCles.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="programme.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="testSI.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tp05.pdf" ex="false" tool="3" flavor2="0">
       </item>
@@ -138,6 +141,8 @@
       <item path="motsCles.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="programme.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="testSI.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tp05.pdf" ex="false" tool="3" flavor2="0">
       </item>
