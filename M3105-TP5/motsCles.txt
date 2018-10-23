@@ -34,3 +34,4 @@ et
 ou
 non
 koala
+panda
