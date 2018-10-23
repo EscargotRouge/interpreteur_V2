@@ -55,5 +55,14 @@ procedure principale()
         i=1;
     fintantque
 
+# test repeter
+
+rep = 1;
+
+repeter
+    rep=rep+2;
+jusqua (rep>4)
+
+
 finproc
 # Commentaire Final
