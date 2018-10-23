@@ -139,86 +139,40 @@ Noeud* Interpreteur::instSiRiche() {
     // <instSiRiche> ::= si (<expression>) <seqInst> { sinonsi (<expression>) <seqInst> } [sinon <seqInst>] finsi
 
     vector vCond;
-    vector vSeq;    
-    
+    vector vSeq;
+
     testerEtAvancer("si");
     testerEtAvancer("(");
     Noeud* condition = expression(); // On mémorise la condition
     vCond.push_back(condition);
     testerEtAvancer(")");
-    
+
     Noeud* sequence = seqInst();
-    vSeq.push_back(sequence);   
-    
-    int i = 0;
-    if ( A ) {
-        return new NoeudInstSiRiche(vCond[i], vSeq[i])
-    } else {
-    
-    while  (m_lecteur.getSymbole() == "sinonsi"){
+    vSeq.push_back(sequence);
+
+
+
+    while (m_lecteur.getSymbole() == "sinonsi") {
         testerEtAvancer("sinonsi");
         m_lecteur.avancer();
-       testerEtAvancer("(");
-       Noeud* condition = expression(); // On mémorise la condition
-       testerEtAvancer(")");
+        testerEtAvancer("(");
+        Noeud* condition = expression(); // On mémorise la condition
+        vCond.push_back(condition);
+        testerEtAvancer(")");
         sequence = seqInst(); // On mémorise la séquence d'instruction
+        vSeq.push_back(sequence);
     }
-    
-    //test sinon
-    else if (B) {
-      
-        {
-            
-        }
-    }
-    
 
-  si (i>14)
-    x1=1;
-  sinonsi(i<14)
-    x2=2;
-  sinon
-    x3=3;
-  finsi
-    
-    
-    
-    
-    
-    
-    
-    
-    
-//    testerEtAvancer("si");
-//    testerEtAvancer("(");
-//    Noeud* condition = expression(); // On mémorise la condition
-//    testerEtAvancer(")");
-//
-//    //    sequence = seqInst(); // On mémorise la séquence d'instruction
-//    Noeud* sequenceVraie = seqInst();
-//    
-//    
-//   // Noeud* sequenceFausse;
-//
-//    while (m_lecteur.getSymbole() == "sinonsi") {
-//        m_lecteur.avancer();
-//        testerEtAvancer("(");
-//        Noeud* condition = expression(); // On mémorise la condition
-//        testerEtAvancer(")");
-//        sequenceVraie = seqInst(); // On mémorise la séquence d'instruction
-//    }
-//    if (m_lecteur.getSymbole() == "sinon") {
-//        m_lecteur.avancer();
-//        sequenceFausse = seqInst(); // On mémorise la séquence d'instruction
-//    }
-//    testerEtAvancer("finsi");
-//    
-//    if (sequenceFausse != NULL) {
-//        return new NoeudInstSiRiche(condition, sequenceVraie, sequenceFausse); // Et on renvoie un noeud Instruction Si
-//    } else {
-//        return new NoeudInstSiRiche(condition, sequenceVraie, NULL);
-//    }
-}
+    if (m_lecteur.getSymbole() == "sinon") {
+        m_lecteur.avancer();
+        sequence = seqInst(); // On mémorise la séquence d'instruction
+        vSeq.push_back(sequence);
+    }
+    testerEtAvancer("finsi");
+
+    return new NoeudInstSiRiche(vCond, vSeq);
+
+
 }
 
 Noeud* Interpreteur::instTantQue() {
