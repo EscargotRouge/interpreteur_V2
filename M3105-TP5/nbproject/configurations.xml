@@ -41,6 +41,10 @@
     <itemPath>motsCles.txt</itemPath>
     <itemPath>programme.txt</itemPath>
     <itemPath>testSI.txt</itemPath>
+    <itemPath>test_ecrire.txt</itemPath>
+    <itemPath>test_pour.txt</itemPath>
+    <itemPath>test_repeter.txt</itemPath>
+    <itemPath>test_tantque.txt</itemPath>
     <itemPath>tp05.pdf</itemPath>
   </logicalFolder>
   <projectmakefile>M3105-TP5-Makefile.mk</projectmakefile>
@@ -86,6 +90,14 @@
       <item path="programme.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="testSI.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_ecrire.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_pour.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_repeter.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_tantque.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tp05.pdf" ex="false" tool="3" flavor2="0">
       </item>
@@ -143,6 +155,14 @@
       <item path="programme.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="testSI.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_ecrire.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_pour.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_repeter.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_tantque.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tp05.pdf" ex="false" tool="3" flavor2="0">
       </item>

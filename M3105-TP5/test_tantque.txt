@@ -1,0 +1,11 @@
+
+# Fichier de test de la fonction tantque
+# Les lignes de commentaires commencent par #
+
+procedure principale()
+  i = 0;
+    tantque (i<10)
+        i = i+1;
+    fintantque
+finproc
+# Commentaire Final

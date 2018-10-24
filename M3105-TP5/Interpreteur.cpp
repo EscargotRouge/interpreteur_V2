@@ -59,7 +59,9 @@ Noeud* Interpreteur::seqInst() {
         sequence->ajoute(inst());
     } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si"
             || m_lecteur.getSymbole() == "tantque"
-            || m_lecteur.getSymbole() == "repeter")
+            || m_lecteur.getSymbole() == "repeter"
+            || m_lecteur.getSymbole() == "pour"
+            || m_lecteur.getSymbole() == "ecrire")
         ;
     // Tant que le symbole courant est un début possible d'instruction...
     // Il faut compléter cette condition chaque fois qu'on rajoute une nouvelle instruction
@@ -81,6 +83,12 @@ Noeud* Interpreteur::inst() {
 
     else if (m_lecteur.getSymbole() == "repeter")
         return instRepeter();
+    
+    else if (m_lecteur.getSymbole() == "pour")
+        return instPour();
+    
+    else if (m_lecteur.getSymbole() == "ecrire")
+        return instEcrire();
 
     else erreur("Instruction incorrecte");
 }
@@ -196,5 +204,48 @@ Noeud* Interpreteur::instRepeter() {
     testerEtAvancer("(");
     Noeud* condition = expression(); //on mémorise condition
     testerEtAvancer(")");
+    testerEtAvancer(";");
     return new NoeudInstRepeter(condition, sequence); //return Noeud repter
 } 
+
+Noeud* Interpreteur::instPour() {
+    // <instPour> ::= pour ( [ <affectation> ] ; <expression> ; [ <affectation> ] ) <seqInst> finpour
+
+    testerEtAvancer("pour");
+    testerEtAvancer("(");
+    Noeud* initialisation = affectation(); // i = 0
+    testerEtAvancer(";");
+    Noeud* condition = expression(); // i<10
+    testerEtAvancer(";");
+    Noeud* incrementation = affectation(); // i = i + 1
+    testerEtAvancer(")");
+    Noeud* sequence = seqInst();
+    testerEtAvancer("finpour");
+    return new NoeudInstPour(initialisation, condition, incrementation, sequence); 
+     
+} 
+
+Noeud* Interpreteur::instEcrire() {
+    // <instEcrire> ::= ecrire ( <expression> | <chaine> { , <expression> | <chaine> } )
+
+    // on s'était arrêter ici
+    
+    // ce qu'il faut faire :
+    // SI c'est une chaine écrire la chaine, si c'est une expresssion écrire la valeur sur laquelle il "pointe"
+    // boucle séparé par uine virgule sauf pour le premier test
+    // ps : se servir de <Chaine>
+    
+    testerEtAvancer("ecrire");
+    testerEtAvancer("(");
+    Noeud* expr = expression(); 
+    
+        while () {
+    }
+    testerEtAvancer(")");
+    testerEtAvancer(";");
+
+    return new NoeudInstEcrire(sequence, condition); 
+     
+} 
+
+

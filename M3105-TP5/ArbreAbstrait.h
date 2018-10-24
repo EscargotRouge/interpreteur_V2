@@ -111,7 +111,23 @@ class NoeudInstRepeter: public Noeud {
     Noeud*  m_sequence;
 };
 
+////////////////////////////////////////////////////////////////////////////////
+class NoeudInstPour: public Noeud {
+// Classe pour représenter un noeud "instruction pour"
+//  et ses 2 fils : la condition du jusqua et la séquence d'instruction associée                                           MODIF
+  public:
+    NoeudInstPour(Noeud* initialisation, Noeud* condition, Noeud* incrementation, Noeud* sequence);
+     // Construit une "instruction si" avec sa condition et sa séquence d'instruction
+   ~NoeudInstPour() {} // A cause du destructeur virtuel de la classe Noeud
+    int executer();  // Exécute l'instruction si : si condition vraie on exécute la séquence                              MODIF
 
+  private:
+    Noeud*  m_initialisation;
+    Noeud*  m_condition;
+    Noeud*  m_incrementation;
+    Noeud*  m_sequence;
+    
+};
 
 
 
