@@ -83,10 +83,10 @@ Noeud* Interpreteur::inst() {
 
     else if (m_lecteur.getSymbole() == "repeter")
         return instRepeter();
-    
+
     else if (m_lecteur.getSymbole() == "pour")
         return instPour();
-    
+
     else if (m_lecteur.getSymbole() == "ecrire")
         return instEcrire();
 
@@ -164,7 +164,7 @@ Noeud* Interpreteur::instSiRiche() {
     while (m_lecteur.getSymbole() == "sinonsi") {
         m_lecteur.avancer();
         testerEtAvancer("(");
-        
+
         Noeud* condition = expression(); // On mémorise la condition
         vCond.push_back(condition);
         testerEtAvancer(")");
@@ -206,7 +206,7 @@ Noeud* Interpreteur::instRepeter() {
     testerEtAvancer(")");
     testerEtAvancer(";");
     return new NoeudInstRepeter(condition, sequence); //return Noeud repter
-} 
+}
 
 Noeud* Interpreteur::instPour() {
     // <instPour> ::= pour ( [ <affectation> ] ; <expression> ; [ <affectation> ] ) <seqInst> finpour
@@ -221,31 +221,52 @@ Noeud* Interpreteur::instPour() {
     testerEtAvancer(")");
     Noeud* sequence = seqInst();
     testerEtAvancer("finpour");
-    return new NoeudInstPour(initialisation, condition, incrementation, sequence); 
-     
-} 
+    return new NoeudInstPour(initialisation, condition, incrementation, sequence);
+
+}
 
 Noeud* Interpreteur::instEcrire() {
     // <instEcrire> ::= ecrire ( <expression> | <chaine> { , <expression> | <chaine> } )
 
     // on s'était arrêter ici
-    
+
     // ce qu'il faut faire :
     // SI c'est une chaine écrire la chaine, si c'est une expresssion écrire la valeur sur laquelle il "pointe"
     // boucle séparé par uine virgule sauf pour le premier test
     // ps : se servir de <Chaine>
-    
+
+    bool LecturePremierTerme = true; //le but étant de lire le premier terme sans prêter attention aux points virgules
+
     testerEtAvancer("ecrire");
     testerEtAvancer("(");
-    Noeud* expr = expression(); 
     
-        while () {
-    }
-    testerEtAvancer(")");
+    NoeudInstEcrire* noeud = new NoeudInstEcrire();
+            
+
+    do { //do while pour lire premier terme sans virgule
+
+        if (!LecturePremierTerme) { //si c'est pas le premier terme,
+            testerEtAvancer(","); //il faut attendre une virgule entre chaque instruction
+        }
+
+        if (m_lecteur.getSymbole() == "<CHAINE>") {
+            Noeud* chaine = m_table.chercheAjoute(m_lecteur.getSymbole()); //ask M
+            noeud
+            testerEtAvancer("<CHAINE>");
+            
+
+        } else {
+            Noeud* expr = expression();
+
+        }
+        LecturePremierTerme = false;
+
+    } while (m_lecteur.getSymbole() != ")");
+    m_lecteur.avancer();
     testerEtAvancer(";");
 
-    return new NoeudInstEcrire(sequence, condition); 
-     
-} 
+    //return new NoeudInstEcrire(sequence, condition);
+
+}
 
 

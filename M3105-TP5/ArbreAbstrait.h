@@ -1,139 +1,48 @@
-#ifndef ARBREABSTRAIT_H
-#define ARBREABSTRAIT_H
-
-// Contient toutes les déclarations de classes nécessaires
-//  pour représenter l'arbre abstrait
-
-#include <vector>
-#include <iostream>
-#include <iomanip>
-using namespace std;
+#ifndef INTERPRETEUR_H
+#define INTERPRETEUR_H
 
 #include "Symbole.h"
+#include "Lecteur.h"
 #include "Exceptions.h"
+#include "TableSymboles.h"
+#include "ArbreAbstrait.h"
 
-////////////////////////////////////////////////////////////////////////////////
-class Noeud {
-// Classe abstraite dont dériveront toutes les classes servant à représenter l'arbre abstrait
-// Remarque : la classe ne contient aucun constructeur
-  public:
-    virtual int  executer() =0 ; // Méthode pure (non implémentée) qui rend la classe abstraite
-    virtual void ajoute(Noeud* instruction) { throw OperationInterditeException(); }
-    virtual ~Noeud() {} // Présence d'un destructeur virtuel conseillée dans les classes abstraites
-};
+class Interpreteur {
+public:
+	Interpreteur(ifstream & fichier);   // Construit un interpréteur pour interpreter
+	                                    //  le programme dans  fichier 
+                                      
+	void analyse();                     // Si le contenu du fichier est conforme à la grammaire,
+	                                    //   cette méthode se termine normalement et affiche un message "Syntaxe correcte".
+                                      //   la table des symboles (ts) et l'arbre abstrait (arbre) auront été construits
+	                                    // Sinon, une exception sera levée
 
-////////////////////////////////////////////////////////////////////////////////
-class NoeudSeqInst : public Noeud {
-// Classe pour représenter un noeud "sequence d'instruction"
-//  qui a autant de fils que d'instructions dans la séquence
-  public:
-     NoeudSeqInst();   // Construit une séquence d'instruction vide
-    ~NoeudSeqInst() {} // A cause du destructeur virtuel de la classe Noeud
-    int executer();    // Exécute chaque instruction de la séquence
-    void ajoute(Noeud* instruction);  // Ajoute une instruction à la séquence
+	inline const TableSymboles & getTable () const  { return m_table;    } // accesseur	
+	inline Noeud* getArbre () const { return m_arbre; }                    // accesseur
+	
+private:
+    Lecteur        m_lecteur;  // Le lecteur de symboles utilisé pour analyser le fichier
+    TableSymboles  m_table;    // La table des symboles valués
+    Noeud*         m_arbre;    // L'arbre abstrait
 
-  private:
-    vector<Noeud *> m_instructions; // pour stocker les instructions de la séquence
-};
-
-////////////////////////////////////////////////////////////////////////////////
-class NoeudAffectation : public Noeud {
-// Classe pour représenter un noeud "affectation"
-//  composé de 2 fils : la variable et l'expression qu'on lui affecte
-  public:
-     NoeudAffectation(Noeud* variable, Noeud* expression); // construit une affectation
-    ~NoeudAffectation() {} // A cause du destructeur virtuel de la classe Noeud
-    int executer();        // Exécute (évalue) l'expression et affecte sa valeur à la variable
-
-  private:
-    Noeud* m_variable;
-    Noeud* m_expression;
-};
-
-////////////////////////////////////////////////////////////////////////////////
-class NoeudOperateurBinaire : public Noeud {
-// Classe pour représenter un noeud "opération binaire" composé d'un opérateur
-//  et de 2 fils : l'opérande gauche et l'opérande droit
-  public:
-    NoeudOperateurBinaire(Symbole operateur, Noeud* operandeGauche, Noeud* operandeDroit);
-    // Construit une opération binaire : operandeGauche operateur OperandeDroit
-   ~NoeudOperateurBinaire() {} // A cause du destructeur virtuel de la classe Noeud
-    int executer();            // Exécute (évalue) l'opération binaire)
-
-  private:
-    Symbole m_operateur;
-    Noeud*  m_operandeGauche;
-    Noeud*  m_operandeDroit;
-};
-
-////////////////////////////////////////////////////////////////////////////////
-class NoeudInstSiRiche : public Noeud {
-// Classe pour représenter un noeud "instruction si"
-//  et ses 2 fils : la condition du si et la séquence d'instruction associée
-  public:
-    NoeudInstSiRiche(std::vector<Noeud*> vCondition,std::vector<Noeud*> vSequence);
-     // Construit une "instruction si" avec sa condition et sa séquence d'instruction
-   ~NoeudInstSiRiche() {} // A cause du destructeur virtuel de la classe Noeud
-    int executer();  // Exécute l'instruction si : si condition vraie on exécute la séquence
-
-  private:
-    std::vector<Noeud*>  m_vCondition;
-    std::vector<Noeud*>  m_vSequence;
-};
-
-////////////////////////////////////////////////////////////////////////////////
-class NoeudInstTantQue: public Noeud {
-// Classe pour représenter un noeud "instruction tantque"
-//  et ses 2 fils : la condition du tantque et la séquence d'instruction associée
-  public:
-    NoeudInstTantQue(Noeud* condition, Noeud* sequence);
-     // Construit une "instruction si" avec sa condition et sa séquence d'instruction
-   ~NoeudInstTantQue() {} // A cause du destructeur virtuel de la classe Noeud
-    int executer();  // Exécute l'instruction si : si condition vraie on exécute la séquence
-
-  private:
-    Noeud*  m_condition;
-    Noeud*  m_sequence;
-};
-
-////////////////////////////////////////////////////////////////////////////////
-class NoeudInstRepeter: public Noeud {
-// Classe pour représenter un noeud "instruction repeter"
-//  et ses 2 fils : la condition du jusqua et la séquence d'instruction associée
-  public:
-    NoeudInstRepeter(Noeud* condition, Noeud* sequence);
-     // Construit une "instruction si" avec sa condition et sa séquence d'instruction
-   ~NoeudInstRepeter() {} // A cause du destructeur virtuel de la classe Noeud
-    int executer();  // Exécute l'instruction si : si condition vraie on exécute la séquence
-
-  private:
-    Noeud*  m_condition;
-    Noeud*  m_sequence;
-};
-
-////////////////////////////////////////////////////////////////////////////////
-class NoeudInstPour: public Noeud {
-// Classe pour représenter un noeud "instruction pour"
-//  et ses 2 fils : la condition du jusqua et la séquence d'instruction associée                                           MODIF
-  public:
-    NoeudInstPour(Noeud* initialisation, Noeud* condition, Noeud* incrementation, Noeud* sequence);
-     // Construit une "instruction si" avec sa condition et sa séquence d'instruction
-   ~NoeudInstPour() {} // A cause du destructeur virtuel de la classe Noeud
-    int executer();  // Exécute l'instruction si : si condition vraie on exécute la séquence                              MODIF
-
-  private:
-    Noeud*  m_initialisation;
-    Noeud*  m_condition;
-    Noeud*  m_incrementation;
-    Noeud*  m_sequence;
+    // Implémentation de la grammaire
+    Noeud*  programme();   //   <programme> ::= procedure principale() <seqInst> finproc FIN_FICHIER
+    Noeud*  seqInst();	   //     <seqInst> ::= <inst> { <inst> }
+    Noeud*  inst();	   //        <inst> ::= <affectation> ; | <instSiRiche> | <instTantQue> | <instRepeter> ; | <instPour> | <instEcrire> ; | <insLire> ;
+    Noeud*  affectation(); // <affectation> ::= <variable> = <expression> 
+    Noeud*  expression();  //  <expression> ::= <facteur> { <opBinaire> <facteur> }
+    Noeud*  facteur();     //     <facteur> ::= <entier>  |  <variable>  |  - <facteur>  | non <facteur> | ( <expression> )
+                           //   <opBinaire> ::= + | - | *  | / | < | > | <= | >= | == | != | et | ou
+    Noeud*  instSiRiche(); // <instSiRiche> ::= si (<expression>) <seqInst> { sinonsi (<expression>) <seqInst> } [sinon <seqInst>] finsi
+    Noeud*  instTantQue(); // <instTantQue> ::= tantque (<expression>) <seqInst> fintantque
+    Noeud*  instRepeter(); // <instRepeter> ::= repeter <seqInst> jusqua ( <expression>)
+    Noeud*  instPour(); // <instPour> ::= pour ( [ <affectation> ] ; <expression> ; [ <affectation> ] ) <seqInst> finpour
+    Noeud*  instEcrire(); // <instEcrire> ::= ecrire ( <expression> | <chaine> { , <expression> | <chaine> } )
     
+    // outils pour simplifier l'analyse syntaxique
+    void tester (const string & symboleAttendu) const throw (SyntaxeException);   // Si symbole courant != symboleAttendu, on lève une exception
+    void testerEtAvancer(const string & symboleAttendu) throw (SyntaxeException); // Si symbole courant != symboleAttendu, on lève une exception, sinon on avance
+    void erreur (const string & mess) const throw (SyntaxeException);             // Lève une exception "contenant" le message mess
 };
 
-
-
-
-
-
-
-
-#endif /* ARBREABSTRAIT_H */
+#endif /* INTERPRETEUR_H */

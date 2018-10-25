@@ -144,3 +144,15 @@ int NoeudInstPour::executer() {
     return 0; // La valeur renvoyée ne représente rien !
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstEcrire
+////////////////////////////////////////////////////////////////////////////////
+
+NoeudInstEcrire::NoeudInstEcrire(Noeud* chaine, Noeud* expression)
+: m_chaine(chaine), m_expression(expression) {
+}
+
+int NoeudInstEcrire::executer() {
+    
+    return 0; // La valeur renvoyée ne représente rien !
+}
