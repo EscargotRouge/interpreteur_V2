@@ -135,14 +135,14 @@ class NoeudInstEcrire: public Noeud {
 // Classe pour représenter un noeud "instruction pour"
 //  et ses 2 fils : la condition du jusqua et la séquence d'instruction associée                                           MODIF
   public:
-    NoeudInstEcrire(Noeud* chaine, Noeud* expresssion);
+    NoeudInstEcrire();
      // Construit une "instruction si" avec sa condition et sa séquence d'instruction
    ~NoeudInstEcrire() {} // A cause du destructeur virtuel de la classe Noeud
     int executer();  // Exécute l'instruction si : si condition vraie on exécute la séquence                              MODIF
-
+    void ajoute(Noeud* instruction);
+    
   private:
-    Noeud*  m_chaine;
-    Noeud*  m_expression;
+    vector<Noeud*> m_instructions;
     
 };
 

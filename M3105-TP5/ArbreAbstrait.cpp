@@ -4,6 +4,7 @@
 #include "Symbole.h"
 #include "SymboleValue.h"
 #include "Exceptions.h"
+#include <typeinfo>
 
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudSeqInst
@@ -140,7 +141,7 @@ int NoeudInstPour::executer() {
     for (m_initialisation->executer(); m_condition->executer(); m_incrementation->executer()) {
         m_sequence->executer();
     }
-    
+
     return 0; // La valeur renvoyée ne représente rien !
 }
 
@@ -148,11 +149,28 @@ int NoeudInstPour::executer() {
 // NoeudInstEcrire
 ////////////////////////////////////////////////////////////////////////////////
 
-NoeudInstEcrire::NoeudInstEcrire(Noeud* chaine, Noeud* expression)
-: m_chaine(chaine), m_expression(expression) {
+NoeudInstEcrire::NoeudInstEcrire() {
 }
 
 int NoeudInstEcrire::executer() {
-    
+
+    for (auto p : m_instructions) { //auto équivaut à Noeud*
+
+        // on regarde si l'objet pointé par p est de type SymboleValue et si c'est une chaïne
+        if ((typeid (*p) == typeid (SymboleValue) && *((SymboleValue*) p) == "<CHAINE>")) {
+            string str(((SymboleValue*) p)->getChaine()); // transforme la chaine en chaine
+            str = str.erase(0, 1); //
+            str.pop_back(); //
+
+            cout << str; //transormera le x en x
+        } else {
+
+            cout << p->executer(); // transformera la variable x en sa valeur
+        }
+    }
     return 0; // La valeur renvoyée ne représente rien !
+}
+
+void NoeudInstEcrire::ajoute(Noeud* instruction) {
+    m_instructions.push_back(instruction);
 }

@@ -228,44 +228,34 @@ Noeud* Interpreteur::instPour() {
 Noeud* Interpreteur::instEcrire() {
     // <instEcrire> ::= ecrire ( <expression> | <chaine> { , <expression> | <chaine> } )
 
-    // on s'était arrêter ici
-
-    // ce qu'il faut faire :
-    // SI c'est une chaine écrire la chaine, si c'est une expresssion écrire la valeur sur laquelle il "pointe"
-    // boucle séparé par uine virgule sauf pour le premier test
-    // ps : se servir de <Chaine>
-
-    bool LecturePremierTerme = true; //le but étant de lire le premier terme sans prêter attention aux points virgules
-
+    bool lecturePremierTerme = true; //le but étant de lire le premier terme sans prêter attention aux points virgules
+    NoeudInstEcrire* ecrireNoeud = new NoeudInstEcrire();
+    
     testerEtAvancer("ecrire");
     testerEtAvancer("(");
-    
-    NoeudInstEcrire* noeud = new NoeudInstEcrire();
-            
 
     do { //do while pour lire premier terme sans virgule
 
-        if (!LecturePremierTerme) { //si c'est pas le premier terme,
+        if (!lecturePremierTerme) { //si c'est pas le premier terme,
             testerEtAvancer(","); //il faut attendre une virgule entre chaque instruction
         }
 
         if (m_lecteur.getSymbole() == "<CHAINE>") {
-            Noeud* chaine = m_table.chercheAjoute(m_lecteur.getSymbole()); //ask M
-            noeud
-            testerEtAvancer("<CHAINE>");
-            
+            Noeud* chaine = m_table.chercheAjoute(m_lecteur.getSymbole()); //cherche Symbole dans la table de symbole, si il le trouve pas il l'ajoute et renvoie son pointeur (si il le trouve il renvoie pointeur aussi)
+            ecrireNoeud->ajoute(chaine);  //ajoute chaine au noeud (NoeudInstEcrire)
+            testerEtAvancer("<CHAINE>");            
 
         } else {
             Noeud* expr = expression();
-
+            ecrireNoeud->ajoute(expr);    //ajoute expr au noeud (NoeudInstEcrire)
         }
-        LecturePremierTerme = false;
+        lecturePremierTerme = false;
 
     } while (m_lecteur.getSymbole() != ")");
     m_lecteur.avancer();
     testerEtAvancer(";");
-
-    //return new NoeudInstEcrire(sequence, condition);
+    
+    return ecrireNoeud;
 
 }
 
