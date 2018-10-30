@@ -42,6 +42,7 @@
     <itemPath>programme.txt</itemPath>
     <itemPath>testSI.txt</itemPath>
     <itemPath>test_ecrire.txt</itemPath>
+    <itemPath>test_lire.txt</itemPath>
     <itemPath>test_pour.txt</itemPath>
     <itemPath>test_repeter.txt</itemPath>
     <itemPath>test_tantque.txt</itemPath>
@@ -92,6 +93,8 @@
       <item path="testSI.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="test_ecrire.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_lire.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="test_pour.txt" ex="false" tool="3" flavor2="0">
       </item>
@@ -157,6 +160,8 @@
       <item path="testSI.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="test_ecrire.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_lire.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="test_pour.txt" ex="false" tool="3" flavor2="0">
       </item>

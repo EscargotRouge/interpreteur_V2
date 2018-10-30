@@ -132,8 +132,7 @@ class NoeudInstPour: public Noeud {
 
 ////////////////////////////////////////////////////////////////////////////////
 class NoeudInstEcrire: public Noeud {
-// Classe pour représenter un noeud "instruction pour"
-//  et ses 2 fils : la condition du jusqua et la séquence d'instruction associée                                           MODIF
+// Classe pour représenter un noeud "instruction Ecrire"                                        MODIF
   public:
     NoeudInstEcrire();
      // Construit une "instruction si" avec sa condition et sa séquence d'instruction
@@ -142,7 +141,22 @@ class NoeudInstEcrire: public Noeud {
     void ajoute(Noeud* instruction);
     
   private:
-    vector<Noeud*> m_instructions;
+    vector<Noeud*> m_vInstruction; //instruction = chaine ou expression
+    
+};
+
+////////////////////////////////////////////////////////////////////////////////
+class NoeudInstLire: public Noeud {
+// Classe pour représenter un noeud "instruction Lire"                                        MODIF
+  public:
+    NoeudInstLire();
+     // Construit une variable
+   ~NoeudInstLire() {} // A cause du destructeur virtuel de la classe Noeud
+    int executer();  //                              MODIF
+    void ajoute(Noeud* variable);
+    
+  private:
+    vector<Noeud*> m_vVariable; 
     
 };
 

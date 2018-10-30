@@ -153,24 +153,44 @@ NoeudInstEcrire::NoeudInstEcrire() {
 }
 
 int NoeudInstEcrire::executer() {
-
-    for (auto p : m_instructions) { //auto équivaut à Noeud*
+    for (auto p : m_vInstruction) { //auto équivaut à Noeud* , on boucle pour chaque instruction
 
         // on regarde si l'objet pointé par p est de type SymboleValue et si c'est une chaïne
         if ((typeid (*p) == typeid (SymboleValue) && *((SymboleValue*) p) == "<CHAINE>")) {
-            string str(((SymboleValue*) p)->getChaine()); // transforme la chaine en chaine
-            str = str.erase(0, 1); //
-            str.pop_back(); //
+            //cas d'une chaine
+            string str(((SymboleValue*) p)->getChaine()); // transforme la <CHAINE> en chaine c++(string)
+            str = str.erase(0, 1); //supprime la première guillemet de la chaine
+            str.pop_back(); //On supprime la dernière guillemet de la chaine
 
-            cout << str; //transormera le x en x
-        } else {
+            cout << str; //transormera le x en x            
+        } else { // cas d'une expression
 
             cout << p->executer(); // transformera la variable x en sa valeur
         }
     }
+    cout << endl; //Lisibilité sur la console -> Du coup on a réalisé une variante d'EcrireLigne en soit.
     return 0; // La valeur renvoyée ne représente rien !
 }
 
 void NoeudInstEcrire::ajoute(Noeud* instruction) {
-    m_instructions.push_back(instruction);
+    m_vInstruction.push_back(instruction);
+}
+
+NoeudInstLire::NoeudInstLire() {
+}
+
+int NoeudInstLire::executer() {
+    for (auto uneVariable : m_vVariable) { //auto équivaut à Noeud* , on boucle pour chaque instruction
+        
+        int intSaisi; //y'a un e ou pas à Saisi ? check à la fin
+        
+        cin >> intSaisi;
+        cin.ignore(256, '\n'); // Warning Philippe Martin Cour Magistral, permet de prendre des chaines de caractères avec des espaces style : "Tour Eiffel"
+        ((SymboleValue*) uneVariable)->setValeur(intSaisi); //faut insérer la valeur saisie dans uneVariable
+    }
+    return 0; // La valeur renvoyée ne représente rien !
+}
+
+void NoeudInstLire::ajoute(Noeud* variable) {
+    m_vVariable.push_back(variable);
 }

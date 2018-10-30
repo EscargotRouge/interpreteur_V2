@@ -15,11 +15,20 @@ ecrire(p);
 ecrire("Le kiwi possède x yeux ", x);
 #doit afficher : Le kiwi possède x yeux 7
 
-ecrire("Le kiwi possède ",x, "yeux");
+ecrire("Le kiwi possède ",x, " yeux");
 #doit afficher : Le kiwi possède 7 yeux
 
 ecrire("Koala ","Papa ","cc ",x);
 #doit afficher : Koala Papa cc 7
+
+#ecrire();
+#doit buger : tester et ça bug bien
+
+ecrire("");
+#doit rien afficher mais ça passe
+
+ecrire("parenthèse fermante : ), bug ou pas ?");
+#doit afficher : " parenthèse fermante : ), bug ou pas ?"
 
 finproc
 # Commentaire Final

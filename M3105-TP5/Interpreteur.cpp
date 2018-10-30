@@ -61,7 +61,8 @@ Noeud* Interpreteur::seqInst() {
             || m_lecteur.getSymbole() == "tantque"
             || m_lecteur.getSymbole() == "repeter"
             || m_lecteur.getSymbole() == "pour"
-            || m_lecteur.getSymbole() == "ecrire")
+            || m_lecteur.getSymbole() == "ecrire"
+            || m_lecteur.getSymbole() == "lire")
         ;
     // Tant que le symbole courant est un début possible d'instruction...
     // Il faut compléter cette condition chaque fois qu'on rajoute une nouvelle instruction
@@ -89,6 +90,9 @@ Noeud* Interpreteur::inst() {
 
     else if (m_lecteur.getSymbole() == "ecrire")
         return instEcrire();
+
+    else if (m_lecteur.getSymbole() == "lire")
+        return instLire();
 
     else erreur("Instruction incorrecte");
 }
@@ -228,35 +232,64 @@ Noeud* Interpreteur::instPour() {
 Noeud* Interpreteur::instEcrire() {
     // <instEcrire> ::= ecrire ( <expression> | <chaine> { , <expression> | <chaine> } )
 
-    bool lecturePremierTerme = true; //le but étant de lire le premier terme sans prêter attention aux points virgules
+    bool lecturePremierTerme = true; //le but étant de lire le premier terme sans prêter attention aux virgules
     NoeudInstEcrire* ecrireNoeud = new NoeudInstEcrire();
-    
+
     testerEtAvancer("ecrire");
     testerEtAvancer("(");
 
-    do { //do while pour lire premier terme sans virgule
+    do { //do while pour lire le premier terme qui sera potentiellement présent
 
         if (!lecturePremierTerme) { //si c'est pas le premier terme,
             testerEtAvancer(","); //il faut attendre une virgule entre chaque instruction
         }
 
         if (m_lecteur.getSymbole() == "<CHAINE>") {
-            Noeud* chaine = m_table.chercheAjoute(m_lecteur.getSymbole()); //cherche Symbole dans la table de symbole, si il le trouve pas il l'ajoute et renvoie son pointeur (si il le trouve il renvoie pointeur aussi)
-            ecrireNoeud->ajoute(chaine);  //ajoute chaine au noeud (NoeudInstEcrire)
-            testerEtAvancer("<CHAINE>");            
-
+            Noeud* chaine = m_table.chercheAjoute(m_lecteur.getSymbole()); //cherche Symbole dans la table de symbole, si il le trouve pas il l'ajoute à la fin et renvoie son pointeur (si il le trouve il renvoie pointeur aussi)
+            ecrireNoeud->ajoute(chaine); //ajoute chaine au noeud (NoeudInstEcrire)
+            //testerEtAvancer("<CHAINE>");
+            m_lecteur.avancer(); //on passe la "<CHAINE>"
+            
         } else {
             Noeud* expr = expression();
-            ecrireNoeud->ajoute(expr);    //ajoute expr au noeud (NoeudInstEcrire)
+            ecrireNoeud->ajoute(expr); //ajoute expr au noeud (NoeudInstEcrire)
         }
         lecturePremierTerme = false;
 
     } while (m_lecteur.getSymbole() != ")");
-    m_lecteur.avancer();
+    m_lecteur.avancer(); //on passe la paranthèse fermante ")"
     testerEtAvancer(";");
-    
+
     return ecrireNoeud;
 
 }
 
+Noeud* Interpreteur::instLire() {
+    // <instLire> ::= lire( <variable> {, <variable> } )
+    bool lecturePremierTerme = true; //le but étant de lire le premier terme sans prêter attention aux virgules
+    NoeudInstLire* lireNoeud = new NoeudInstLire();
+
+    testerEtAvancer("lire");
+    testerEtAvancer("(");
+    
+    do { //do while pour lire le premier terme qui sera potentiellement présent
+
+        if (!lecturePremierTerme) { //si c'est pas le premier terme,
+            testerEtAvancer(","); //il faut attendre une virgule entre chaque instruction
+        }
+        
+        Noeud* var = m_table.chercheAjoute(m_lecteur.getSymbole()); // La variable est ajoutée à la table et on la mémorise
+        
+        lireNoeud->ajoute(var); //ajoute variable au noeud (NoeudInstEcrire)
+        m_lecteur.avancer(); //on passe la "<VARIABLE>"   
+        
+        lecturePremierTerme = false;
+
+    } while (m_lecteur.getSymbole() != ")");
+    m_lecteur.avancer(); //on passe la parenthèse fermante ")"
+    testerEtAvancer(";");
+    
+    return lireNoeud;
+
+}
 
