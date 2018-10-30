@@ -40,11 +40,14 @@
     </logicalFolder>
     <itemPath>motsCles.txt</itemPath>
     <itemPath>programme.txt</itemPath>
-    <itemPath>testSI.txt</itemPath>
     <itemPath>test_ecrire.txt</itemPath>
+    <itemPath>test_exception.txt</itemPath>
+    <itemPath>test_exception_ecrire.txt</itemPath>
+    <itemPath>test_exception_lire.txt</itemPath>
     <itemPath>test_lire.txt</itemPath>
     <itemPath>test_pour.txt</itemPath>
     <itemPath>test_repeter.txt</itemPath>
+    <itemPath>test_si.txt</itemPath>
     <itemPath>test_tantque.txt</itemPath>
     <itemPath>tp05.pdf</itemPath>
   </logicalFolder>
@@ -90,15 +93,21 @@
       </item>
       <item path="programme.txt" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="testSI.txt" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="test_ecrire.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_exception.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_exception_ecrire.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_exception_lire.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="test_lire.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="test_pour.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="test_repeter.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_si.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="test_tantque.txt" ex="false" tool="3" flavor2="0">
       </item>
@@ -157,15 +166,21 @@
       </item>
       <item path="programme.txt" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="testSI.txt" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="test_ecrire.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_exception.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_exception_ecrire.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_exception_lire.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="test_lire.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="test_pour.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="test_repeter.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_si.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="test_tantque.txt" ex="false" tool="3" flavor2="0">
       </item>

@@ -23,6 +23,14 @@ void NoeudSeqInst::ajoute(Noeud* instruction) {
     if (instruction != nullptr) m_instructions.push_back(instruction);
 }
 
+void NoeudSeqInst::traduitEnCPP(ostream & cout, unsigned int indentation) const {
+	for (unsigned int i = 0; i < m_instructions.size(); i++) {
+		cout << setw(indentation) << "\t";
+		m_instructions[i]->traduitEnCPP(cout, indentation);
+		cout << endl;
+	}
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudAffectation
 ////////////////////////////////////////////////////////////////////////////////
@@ -112,6 +120,19 @@ int NoeudInstTantQue::executer() {
     return 0; // La valeur renvoyée ne représente rien !
 }
 
+void NoeudSeqInst::traduitEnCPP(ostream & cout, unsigned int indentation) const {
+	
+    
+    
+    
+    
+    for (unsigned int i = 0; i < m_instructions.size(); i++) {
+		cout << setw(indentation) << "\t";
+		m_instructions[i]->traduitEnCPP(cout, indentation);
+		cout << endl;
+	}
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudInstRepeter
 ////////////////////////////////////////////////////////////////////////////////
@@ -126,6 +147,15 @@ int NoeudInstRepeter::executer() {
         m_sequence->executer();
     } while (!m_condition->executer());
     return 0; // La valeur renvoyée ne représente rien !
+}
+
+void NoeudInstRepeter::traduitEnCPP(ostream & cout, unsigned int indentation) const {
+	cout << setw(indentation) << "do {" << endl;  //Ecrit "do {" avec un décalage de 4*indentation espaces
+	m_sequence->traduitEnCPP(cout, indentation + 9);  //traduit en C++ la séquence avec indentation augmentée
+	cout << setw(indentation) << "\t" << "}" << endl;
+	cout << setw(indentation) << "\t" << "while( ";
+	m_condition->traduitEnCPP(cout, 0); //Traduit la condition en C++ sans décalage
+	cout << " );";
 }
 
 ////////////////////////////////////////////////////////////////////////////////

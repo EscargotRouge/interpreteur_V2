@@ -19,11 +19,14 @@ public:
 
 	inline const TableSymboles & getTable () const  { return m_table;    } // accesseur	
 	inline Noeud* getArbre () const { return m_arbre; }                    // accesseur
-	
+        inline bool getErreurExistante() const { return m_erreurExistante; }   // accesseur
+	void traduitEnCPP(ostream & cout, unsigned int indentation) const;
+        
 private:
     Lecteur        m_lecteur;  // Le lecteur de symboles utilisé pour analyser le fichier
     TableSymboles  m_table;    // La table des symboles valués
     Noeud*         m_arbre;    // L'arbre abstrait
+    bool           m_erreurExistante;   // Boolean vrai si y'a AU moins une erreur dans le code;
 
     // Implémentation de la grammaire
     Noeud*  programme();   //   <programme> ::= procedure principale() <seqInst> finproc FIN_FICHIER

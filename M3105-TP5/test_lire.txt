@@ -27,13 +27,6 @@ lire(x,p,z);
 ecrire("valeurs saisies, x, p, z = ",x," ",p," ",z);
 #doit afficher : les trois valeurs
 
-#test avec chaine
-
-#ecrire(chaine);
-#lire(chaine);
-#ecrire("La chaine saisie = ", chaine);
-#doit afficher : La chaine saisie = saisie // sans les ""
-
 
 finproc
 # Commentaire Final
