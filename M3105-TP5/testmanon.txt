@@ -5,7 +5,7 @@
 
 procedure principale()
   i = 12 + 5 * 2 ;
-#affiche 22, pas 34
+#affiche 22, pas 34.
     
 finproc
 # Commentaire Final
