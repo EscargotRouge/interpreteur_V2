@@ -14,23 +14,24 @@ void Interpreteur::analyse() {
 }
 
 void Interpreteur::traduitEnCPP(ostream & cout, unsigned int indentation) const {
-    
-    //cout << "#include <iostream>" << endl << endl; //Si on décide plus tard de pas ecrire console
-    cout << setw(4*indentation) << "int main() {" << endl; //Début du programme C++
-    
+
+    //cout << "#include <iostream>" << endl << endl; // à faire pour plus tard : ecriture dans un fichier traduction.cpp
+    cout << setw(4 * indentation) << "int main() {" << endl; //Début du programme C++
+
     // Ecrire en C++ la déclaration des variables présentes dans le programme...
     // ... variables dont on retrouvera le nom en parcourant la table des symboles !
     // Par exemple, si le programme contient i,j,k, il faudra écrire : int i; int j; int k; ...
 
-    cout << setw(7) << "\t" << "int ";
-    for (int i=0; i < m_table.getTaille(); i++)
-        if (m_table[i] == "<VARIABLE>") cout << m_table[i].getChaine() << "(0), ";
-    cout << '\010' << '\010' << ";" << endl << endl;
+    for (int i = 0; i < m_table.getTaille(); i++)
+        if (m_table[i] == "<VARIABLE>") {
+            cout << setw(4 * indentation) << "int " << m_table[i].getChaine() << ";" << endl;
+        }
+    cout << endl;
+    
+    getArbre()->traduitEnCPP(cout, indentation + 1); //lance l'opération traduitEnCPP sur la racine
 
-    getArbre()->traduitEnCPP(cout, indentation+1); //lance l'opération traduitEnCPP sur la racine
-
-    cout << setw(4*(indentation+1)) << "\t" << "return 0;" << endl;
-    cout << setw(4*indentation) << "}" << endl; //Fin du programme C++
+    cout << setw(4 * (indentation + 1)) << "\t" << "return 0;" << endl;
+    cout << setw(4 * indentation) << "}" << endl; //Fin du programme C++
 }
 
 void Interpreteur::tester(const string & symboleAttendu) const throw (SyntaxeException) {
@@ -71,7 +72,7 @@ Noeud* Interpreteur::programme() {
     try {
         testerEtAvancer("finproc");
     } catch (SyntaxeException s) {
-        cout << "Exception déclenché : " << s.what() << endl;
+        cout << "Exception déclenchée : " << s.what() << endl;
         m_erreurExistante = true;
     }
     tester("<FINDEFICHIER>");
@@ -108,7 +109,8 @@ Noeud* Interpreteur::inst() {
             Noeud *affect = affectation();
             testerEtAvancer(";");
             return affect;
-        } catch (SyntaxeException e) {
+        } catch (SyntaxeException s) {
+            cout << "Exception declenchée : " << s.what() << endl;
             m_erreurExistante = true;
             return nullptr;
         }
@@ -126,8 +128,9 @@ Noeud* Interpreteur::inst() {
             Noeud* repet = instRepeter();
             testerEtAvancer(";");
             return repet;
-        } catch (SyntaxeException e) {
-            m_erreurExistante = true;
+        } catch (SyntaxeException s) {
+            cout << "Exception declenchée : " << s.what() << endl;
+            m_erreurExistante = true; //POSE PROBLEME
             return nullptr;
         }
 
@@ -140,7 +143,8 @@ Noeud* Interpreteur::inst() {
             Noeud* ecrire = instEcrire();
             testerEtAvancer(";");
             return ecrire;
-        } catch (SyntaxeException e) {
+        } catch (SyntaxeException s) {
+            cout << "Exception declenchée : " << s.what() << endl;
             m_erreurExistante = true;
             return nullptr;
         }
@@ -152,7 +156,8 @@ Noeud* Interpreteur::inst() {
             Noeud* lire = instLire();
             testerEtAvancer(";");
             return lire;
-        } catch (SyntaxeException e) {
+        } catch (SyntaxeException s) {
+            cout << "Exception declenchée : " << s.what() << endl;
             m_erreurExistante = true;
             return nullptr;
         }
@@ -249,7 +254,7 @@ Noeud* Interpreteur::instSiRiche() {
         return new NoeudInstSiRiche(vCond, vSeq);
 
     } catch (SyntaxeException s) {
-        cout << "Exception levée : " << s.what() << endl;
+        cout << "Exception declenchée : " << s.what() << endl;
         while (m_lecteur.getSymbole() != "finsi" && m_lecteur.getSymbole() != "<FINDEFICHIER>") {
             m_lecteur.avancer(); //hmm
         }
@@ -295,11 +300,10 @@ Noeud* Interpreteur::instRepeter() {
         testerEtAvancer("(");
         Noeud* condition = expression(); //on mémorise condition
         testerEtAvancer(")");
-        testerEtAvancer(";");
         return new NoeudInstRepeter(condition, sequence); //return Noeud repter
 
     } catch (SyntaxeException s) {
-        cout << "Exception levée : " << s.what() << endl;
+        cout << "Exception declenchée : " << s.what() << endl;
         while (m_lecteur.getSymbole() != "<FINDEFICHIER>") {
             m_lecteur.avancer();
         }
@@ -325,7 +329,7 @@ Noeud* Interpreteur::instPour() {
         return new NoeudInstPour(initialisation, condition, incrementation, sequence);
 
     } catch (SyntaxeException s) {
-        cout << "Exception levée : " << s.what() << endl;
+        cout << "Exception declenchée : " << s.what() << endl;
         while (m_lecteur.getSymbole() != "finpour" && m_lecteur.getSymbole() != "<FINDEFICHIER>") {
             m_lecteur.avancer();
         }
@@ -366,7 +370,6 @@ Noeud* Interpreteur::instEcrire() {
 
         } while (m_lecteur.getSymbole() != ")");
         m_lecteur.avancer(); //on passe la paranthèse fermante ")"
-        testerEtAvancer(";");
 
         return ecrireNoeud;
     } catch (SyntaxeException s) {
@@ -414,11 +417,10 @@ Noeud* Interpreteur::instLire() {
 
         } while (m_lecteur.getSymbole() != ")");
         m_lecteur.avancer(); //on passe la parenthèse fermante ")"
-        testerEtAvancer(";");
 
         return lireNoeud;
     } catch (SyntaxeException s) {
-        cout << "Exception levée : " << s.what() << endl;
+        cout << "Exception declenchée : " << s.what() << endl;
 
         do {
             m_lecteur.avancer();

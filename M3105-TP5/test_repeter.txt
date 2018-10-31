@@ -4,13 +4,14 @@
 
 procedure principale()
 
-  i = 0;
+  i = 2;
 
-# test 
 
 repeter
     i= i+1;
 jusqua (i>9);
  
 finproc
+
+#Affichera i = 12
 # Commentaire Final

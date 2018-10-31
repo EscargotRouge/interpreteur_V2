@@ -31,6 +31,14 @@
                    displayName="Test Files"
                    projectFiles="false"
                    kind="TEST_LOGICAL_FOLDER">
+      <logicalFolder name="f1"
+                     displayName="Test TantQue"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>test_tantque.cpp</itemPath>
+        <itemPath>test_tantque.h</itemPath>
+        <itemPath>test_tantque_runner.cpp</itemPath>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -47,8 +55,9 @@
     <itemPath>test_lire.txt</itemPath>
     <itemPath>test_pour.txt</itemPath>
     <itemPath>test_repeter.txt</itemPath>
-    <itemPath>test_si.txt</itemPath>
+    <itemPath>test_siriche.txt</itemPath>
     <itemPath>test_tantque.txt</itemPath>
+    <itemPath>testmanon.txt</itemPath>
     <itemPath>tp05.pdf</itemPath>
   </logicalFolder>
   <projectmakefile>M3105-TP5-Makefile.mk</projectmakefile>
@@ -87,6 +96,20 @@
       </item>
       <item path="TableSymboles.h" ex="false" tool="3" flavor2="0">
       </item>
+      <folder path="TestFiles/f1">
+        <cTool>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </cTool>
+        <ccTool>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f1</output>
+          <linkerLibItems>
+            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="motsCles.txt" ex="false" tool="3" flavor2="0">
@@ -107,9 +130,17 @@
       </item>
       <item path="test_repeter.txt" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="test_si.txt" ex="false" tool="3" flavor2="0">
+      <item path="test_siriche.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_tantque.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="test_tantque.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="test_tantque.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_tantque_runner.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="testmanon.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tp05.pdf" ex="false" tool="3" flavor2="0">
       </item>
@@ -160,6 +191,20 @@
       </item>
       <item path="TableSymboles.h" ex="false" tool="3" flavor2="0">
       </item>
+      <folder path="TestFiles/f1">
+        <cTool>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </cTool>
+        <ccTool>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f1</output>
+          <linkerLibItems>
+            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="motsCles.txt" ex="false" tool="3" flavor2="0">
@@ -180,9 +225,17 @@
       </item>
       <item path="test_repeter.txt" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="test_si.txt" ex="false" tool="3" flavor2="0">
+      <item path="test_siriche.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_tantque.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="test_tantque.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="test_tantque.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_tantque_runner.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="testmanon.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tp05.pdf" ex="false" tool="3" flavor2="0">
       </item>

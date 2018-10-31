@@ -20,7 +20,7 @@ public:
 	inline const TableSymboles & getTable () const  { return m_table;    } // accesseur	
 	inline Noeud* getArbre () const { return m_arbre; }                    // accesseur
         inline bool getErreurExistante() const { return m_erreurExistante; }   // accesseur
-	void traduitEnCPP(ostream & cout, unsigned int indentation) const;
+	void traduitEnCPP(ostream & cout, unsigned int indentation = 0) const;
         
 private:
     Lecteur        m_lecteur;  // Le lecteur de symboles utilisé pour analyser le fichier
