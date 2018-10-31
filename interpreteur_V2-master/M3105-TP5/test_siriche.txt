@@ -1,0 +1,85 @@
+# Fichier de test de siRiche
+# Les lignes de commentaires commencent par #
+
+procedure principale()
+
+#-------------------------------
+# Test n°1 ~~> Succès 
+# Commentaire : test avec un si tout seul 
+#   i == 15
+#   j == 1
+#-------------------------------
+    ecrire("Test n°1 - Résultat attendu : i == 15; j == 1");
+
+    i = 12+3;
+
+    si (i>14)
+        j=1;
+    finsi
+
+    ecrire("Résultat obtenu : i == ", i, "; j == ",j); ecrire("");
+
+#-------------------------------
+# Test n°2 ~~> Succès 
+# Commentaire : test avec si, sinonsi et sinon
+#   i == 15
+#   j == 3
+#-------------------------------
+    ecrire("Test n°2 - Résultat attendu : i == 15; j == 3");
+
+    i = 12+3;
+
+    si (i<14)
+        j=1;
+    sinonsi(i<14)
+        j=2;
+    sinon
+        j=3;
+     finsi
+
+    ecrire("Résultat obtenu : i == ", i, "; j == ",j); ecrire("");
+
+#-------------------------------
+# Test n°3 ~~> Succès 
+# Commentaire : test avec que si et sinon
+#   i == 15
+#   j == 105
+#-------------------------------
+    ecrire("Test n°3 - Résultat attendu : i == 15; j == 105");
+
+    i = 12+3;
+
+    si (i>14)
+        j=105;
+    sinon
+        j=106;
+    finsi 
+
+    ecrire("Résultat obtenu : i == ", i, "; j == ",j); ecrire("");
+    
+#-------------------------------
+# Test n°4 ~~> Succès 
+# Commentaire : test avec plein de sinonsi
+#   i == 15
+#   j == 21
+#-------------------------------
+    ecrire("Test n°4 - Résultat attendu : i == 15; j == 21");
+
+    i = 12+3;
+
+    si (i<14)
+        j=1;
+    sinonsi(i>14)
+        j=21;
+    sinonsi(i>14)
+        j=22;
+    sinonsi(i<12)
+        j=23;
+    sinon
+        j=3;
+    finsi
+
+    ecrire("Résultat obtenu : i == ", i, "; j == ",j); ecrire("");
+
+finproc
+# Commentaire Final

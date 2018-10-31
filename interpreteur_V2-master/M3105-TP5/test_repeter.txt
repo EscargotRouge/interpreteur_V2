@@ -1,0 +1,36 @@
+# Fichier de test de la fonction repeter
+# Les lignes de commentaires commencent par #
+
+procedure principale()
+
+#-------------------------------
+# Test n°1 ~~> Succès 
+# Commentaire : on incrémente i jusqu'à ce qu'il soit strictement supérieur à 9
+#   i == 10
+#-------------------------------
+    ecrire("Test n°1 - Résultat attendu : i == 11");
+
+    i = 0;
+
+    repeter
+        i= i+1;
+    jusqua (i>10);
+
+    ecrire("Résultat obtenu : i == ", i); ecrire("");
+
+#-------------------------------
+# Test n°2 ~~> Succès 
+# Commentaire : on incrémente i jusqu'à ce qu'il soit strictement supérieur à 9 ou qu'il soit différent de 0
+#   i == 1
+#-------------------------------
+    ecrire("Test n°2 - Résultat attendu : i == 1");
+
+    i = 0;
+
+    repeter
+        i= i+1;
+    jusqua ((i>10) ou (i!=0));
+
+    ecrire("Résultat obtenu : i == ", i); ecrire("");
+ 
+finproc

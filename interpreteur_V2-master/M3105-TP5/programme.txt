@@ -1,0 +1,24 @@
+# Fichier de test
+# Les lignes de commentaires commencent par #
+procedure principale()
+
+
+
+
+# test tantque
+    tantque (i>8)
+        k=5;
+        i=1;
+    fintantque
+
+# test repeter
+
+rep = 1;
+
+repeter
+    rep=rep+2;
+jusqua (rep>4)
+
+
+finproc
+# Commentaire Final

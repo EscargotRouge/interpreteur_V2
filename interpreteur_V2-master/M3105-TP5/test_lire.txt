@@ -1,0 +1,32 @@
+# Fichier de test de la fonction pour lire
+# Les lignes de commentaires commencent par #
+
+procedure principale()
+  
+  p = 10;
+  z = 77;
+  #p et z ont une affectation
+  #x n'a pas d'affection
+
+#test
+
+ecrire("valeur de p avant lecture : ",p);
+ecrire("p := ");
+lire(p);
+ecrire("valeur saisie, p = ", p);
+#doit afficher : l'ancienne valeur de p puis l'int que l'user a saisi
+
+ecrire("x := ");
+lire(x);
+ecrire("valeur saisie, x = ", x);
+#doit afficher : valeur de x que l'user a saisi
+
+ecrire("valeur avant lecture de x, p, z : ",x," ",p," ",z);
+ecrire("x, p, z := ");
+lire(x,p,z);
+ecrire("valeurs saisies, x, p, z = ",x," ",p," ",z);
+#doit afficher : les trois valeurs
+
+
+finproc
+# Commentaire Final

@@ -1,0 +1,23 @@
+procedure principale()
+
+#-------------------------------
+# Test n°5 ~~> Echec 
+# Commentaire : test avec un sinon avant le sinonsi tout seul           Exception
+#   i == 15
+#   j == 21
+#-------------------------------
+    ecrire("Test n°5 - Résultat attendu : i == 15; j == 21");
+
+    i = 12+3;
+
+    si (i>14)
+        j=1;
+    sinon
+        j=3;
+    sinonsi(i<14)
+        j=21;
+    finsi
+
+    ecrire("Résultat obtenu : i == ", i, "; j == ",j); ecrire("");
+
+finproc
