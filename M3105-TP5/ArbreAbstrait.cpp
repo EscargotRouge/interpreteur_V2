@@ -50,7 +50,6 @@ void NoeudAffectation::traduitEnCPP(ostream & cout, unsigned int indentation) co
     cout << " = ";
     m_expression->traduitEnCPP(cout);
     cout << ";";
-    cout << endl;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -231,7 +230,15 @@ int NoeudInstPour::executer() {
 }
 
 void NoeudInstPour::traduitEnCPP(ostream & cout, unsigned int indentation) const {
-
+    cout << setw(indentation) << "" << "for (";
+    m_initialisation->traduitEnCPP(cout);
+    cout << "\10" << ";"; 
+    m_condition->traduitEnCPP(cout);
+    cout << ";";
+    m_incrementation->traduitEnCPP(cout);    
+    cout << "\10" << ") {" << endl;     // \10 supprime le point virgule de l'affectation, on en a pas besoin pour la dernière
+    m_sequence->traduitEnCPP(cout);
+    cout << "}";
 }
 
 ////////////////////////////////////////////////////////////////////////////////

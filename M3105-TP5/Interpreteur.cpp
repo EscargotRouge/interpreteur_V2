@@ -130,7 +130,7 @@ Noeud* Interpreteur::inst() {
             return repet;
         } catch (SyntaxeException s) {
             cout << "Exception declenchée : " << s.what() << endl;
-            m_erreurExistante = true; //POSE PROBLEME
+            m_erreurExistante = true;
             return nullptr;
         }
 
@@ -266,7 +266,7 @@ Noeud* Interpreteur::relation() {
 }
 
 Noeud* Interpreteur::instSiRiche() {
-    // <instSiRiche> ::= si (<expression>) <seqInst> { sinonsi (<expression>) <seqInst> } [sinon <seqInst>] finsi
+    // <instSiRiche> ::= si (<expBool>) <seqInst> { sinonsi (<expBool>) <seqInst> } [sinon <seqInst>] finsi
 
     try {
 
@@ -275,7 +275,7 @@ Noeud* Interpreteur::instSiRiche() {
 
         testerEtAvancer("si");
         testerEtAvancer("(");
-        Noeud* condition = expression(); // On mémorise la condition
+        Noeud* condition = expBool(); // On mémorise la condition
         vCond.push_back(condition);
         testerEtAvancer(")");
 
@@ -286,7 +286,7 @@ Noeud* Interpreteur::instSiRiche() {
             m_lecteur.avancer();
             testerEtAvancer("(");
 
-            Noeud* condition = expression(); // On mémorise la condition
+            Noeud* condition = expBool(); // On mémorise la condition
             vCond.push_back(condition);
             testerEtAvancer(")");
             sequence = seqInst(); // On mémorise la séquence d'instruction
@@ -317,11 +317,11 @@ Noeud* Interpreteur::instSiRiche() {
 }
 
 Noeud* Interpreteur::instTantQue() {
-    //   <instTantQue> ::= tantque ( <expression> ) <seqInst> fintantque
+    //   <instTantQue> ::= tantque ( <expBool> ) <seqInst> fintantque
     try {
         testerEtAvancer("tantque");
         testerEtAvancer("(");
-        Noeud* condition = expression(); //on mémorise condition
+        Noeud* condition = expBool(); //on mémorise condition
         testerEtAvancer(")");
         Noeud* sequence = seqInst();
         testerEtAvancer("fintantque");
@@ -340,14 +340,14 @@ Noeud* Interpreteur::instTantQue() {
 }
 
 Noeud* Interpreteur::instRepeter() {
-    // <instRepeter> ::= repeter <seqInst> jusqua ( <expression>)
+    // <instRepeter> ::= repeter <seqInst> jusqua ( <expBool>)
 
     try {
         testerEtAvancer("repeter");
         Noeud* sequence = seqInst();
         testerEtAvancer("jusqua");
         testerEtAvancer("(");
-        Noeud* condition = expression(); //on mémorise condition
+        Noeud* condition = expBool(); //on mémorise condition
         testerEtAvancer(")");
         return new NoeudInstRepeter(condition, sequence); //return Noeud repter
 
@@ -362,14 +362,14 @@ Noeud* Interpreteur::instRepeter() {
 }
 
 Noeud* Interpreteur::instPour() {
-    // <instPour> ::= pour ( [ <affectation> ] ; <expression> ; [ <affectation> ] ) <seqInst> finpour
+    // <instPour> ::= pour ( [ <affectation> ] ; <expBool> ; [ <affectation> ] ) <seqInst> finpour
 
     try {
         testerEtAvancer("pour");
         testerEtAvancer("(");
         Noeud* initialisation = affectation(); // i = 0
         testerEtAvancer(";");
-        Noeud* condition = expression(); // i<10
+        Noeud* condition = expBool(); // i<10
         testerEtAvancer(";");
         Noeud* incrementation = affectation(); // i = i + 1
         testerEtAvancer(")");
@@ -390,7 +390,7 @@ Noeud* Interpreteur::instPour() {
 }
 
 Noeud* Interpreteur::instEcrire() {
-    // <instEcrire> ::= ecrire ( <expression> | <chaine> { , <expression> | <chaine> } )
+    // <instEcrire> ::= ecrire ( <expBool> | <chaine> { , <expBool> | <chaine> } )
 
     try {
         bool lecturePremierTerme = true; //le but étant de lire le premier terme sans prêter attention aux virgules
@@ -412,7 +412,7 @@ Noeud* Interpreteur::instEcrire() {
                 m_lecteur.avancer(); //on passe la "<CHAINE>"
 
             } else {
-                Noeud* expr = expression();
+                Noeud* expr = expBool();
                 ecrireNoeud->ajoute(expr); //ajoute expr au noeud (NoeudInstEcrire)
             }
             lecturePremierTerme = false;
