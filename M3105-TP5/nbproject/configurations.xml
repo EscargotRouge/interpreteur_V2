@@ -40,7 +40,6 @@
     </logicalFolder>
     <itemPath>motsCles.txt</itemPath>
     <itemPath>programme.txt</itemPath>
-    <itemPath>testSI.txt</itemPath>
     <itemPath>test_ecrire.txt</itemPath>
     <itemPath>test_pour.txt</itemPath>
     <itemPath>test_repeter.txt</itemPath>
@@ -88,8 +87,6 @@
       <item path="motsCles.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="programme.txt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="testSI.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="test_ecrire.txt" ex="false" tool="3" flavor2="0">
       </item>
@@ -153,8 +150,6 @@
       <item path="motsCles.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="programme.txt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="testSI.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="test_ecrire.txt" ex="false" tool="3" flavor2="0">
       </item>
