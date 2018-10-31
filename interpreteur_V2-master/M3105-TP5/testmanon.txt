@@ -1,0 +1,10 @@
+
+
+# Fichier de test de la fonction tantque
+# Les lignes de commentaires commencent par #
+
+procedure principale()
+  i = 12 + 5 * 2 ;
+    
+finproc
+# Commentaire Final

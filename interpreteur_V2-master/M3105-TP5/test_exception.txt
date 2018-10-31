@@ -1,0 +1,60 @@
+# Fichier de test des exceptions
+# Les lignes de commentaires commencent par #
+
+procedure principale()
+
+	ecrire("---test07-Except---");
+
+### ### ### ### ### ###
+
+x = 1;
+
+	si x == 1) #On doit lever une exception et continuer
+		x = x + 1;
+	sinonsi (x > 1)
+		x = x * 2;
+	sinon
+		x = 1;
+	finsi
+
+	ecrire("[1] ok 1/6");
+
+### ### ### ### ### ###
+
+	y = 2;
+
+	si y == 2)
+		y ++;
+	finsi
+
+	ecrire("[2] ok 2/6");
+
+### ### ### ### ### ###
+
+	tantque y < 10)
+		y++;
+	fintantque
+
+### ### ### ### ### ###
+
+	ecrire("[3] ok 3/6");
+
+	pour (x = 0 ; x < 10  x = x + 1) #il manque ;
+	    x = x;
+	finpour
+
+### ### ### ### ### ###
+
+	ecrire("[4] ok 4/6");
+
+### ### ### ### ### ###
+
+	x = 1;
+
+	tantque(x < 10
+		x = x + 1;
+	fintantque
+
+	ecrire("[5] ok 5/6");
+
+finproc

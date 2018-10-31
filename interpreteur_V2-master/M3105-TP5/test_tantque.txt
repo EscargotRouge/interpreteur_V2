@@ -1,0 +1,39 @@
+# Fichier de test de la fonction tantque
+# Les lignes de commentaires commencent par #
+
+procedure principale()
+
+#-------------------------------
+# Test n°1 ~~> Succès 
+# Commentaire : on incrémente i tant que i est strictement inférieur à 10
+#   i == 9
+#-------------------------------
+    ecrire("Test n°1 - Résultat attendu : i == 9");
+
+    i = 0;
+    z = 5;
+
+    tantque (i<10)
+        i = i+1;
+    fintantque
+
+    ecrire("Résultat obtenu : i == ", i); ecrire("");
+
+#-------------------------------
+# Test n°2 ~~> Succès 
+# Commentaire : on incrémente i tant qu'il est inférieur à 10 et supérieur à 0
+#   i == 0
+#-------------------------------
+    ecrire("Test n°1 - Résultat attendu : i == 0");
+
+    i = 0;
+
+    tantque (i<10 et i>0)
+        i = i+1;
+    fintantque
+
+    ecrire("Résultat obtenu : i == ", i); ecrire("");
+
+
+finproc
+# Commentaire Final
