@@ -33,15 +33,21 @@ private:
     Noeud*  seqInst();	   //     <seqInst> ::= <inst> { <inst> }
     Noeud*  inst();	   //        <inst> ::= <affectation> ; | <instSiRiche> | <instTantQue> | <instRepeter> ; | <instPour> | <instEcrire> ; | <insLire> ;
     Noeud*  affectation(); // <affectation> ::= <variable> = <expression> 
-    Noeud*  expression();  //  <expression> ::= <facteur> { <opBinaire> <facteur> }
-    Noeud*  facteur();     //     <facteur> ::= <entier>  |  <variable>  |  - <facteur>  | non <facteur> | ( <expression> )
-                           //   <opBinaire> ::= + | - | *  | / | < | > | <= | >= | == | != | et | ou
-    Noeud*  instSiRiche(); // <instSiRiche> ::= si (<expression>) <seqInst> { sinonsi (<expression>) <seqInst> } [sinon <seqInst>] finsi
-    Noeud*  instTantQue(); // <instTantQue> ::= tantque (<expression>) <seqInst> fintantque
-    Noeud*  instRepeter(); // <instRepeter> ::= repeter <seqInst> jusqua ( <expression>)
-    Noeud*  instPour(); // <instPour> ::= pour ( [ <affectation> ] ; <expression> ; [ <affectation> ] ) <seqInst> finpour
-    Noeud*  instEcrire(); // <instEcrire> ::= ecrire ( <expression> | <chaine> { , <expression> | <chaine> } )
-    Noeud*  instLire(); // <instLire> ::= lire( <variable> {, <variable> } )
+    
+    Noeud*  expression();  //  <expression> ::= <terme> { + <terme> | - <terme> }
+    Noeud*  terme();       //       <terme> ::= <facteur> { * <facteur> | / <facteur> }
+    Noeud*  facteur();     //     <facteur> ::= <entier>  |  <variable>  |  - <expBool>  | non <expBool> | ( <expBool> )
+    Noeud*  expBool();     //     <expBool> ::= <relationEt> { ou <relationEt> }
+    Noeud*  relationEt();  //  <relationEt> ::= <relation> { et <relation> }
+    Noeud*  relation();    //    <relation> ::= <expression> { <opRel> <expression> }
+                           //       <opRel> ::= < | > | <= | >= | == | !=
+    
+    Noeud*  instSiRiche(); // <instSiRiche> ::= si (<expBool>) <seqInst> { sinonsi (<expBool>) <seqInst> } [sinon <seqInst>] finsi
+    Noeud*  instTantQue(); // <instTantQue> ::= tantque (<expBool>) <seqInst> fintantque
+    Noeud*  instRepeter(); // <instRepeter> ::= repeter <seqInst> jusqua ( <expBool>)
+    Noeud*  instPour();    // <instPour>    ::= pour ( [ <affectation> ] ; <expBool> ; [ <affectation> ] ) <seqInst> finpour
+    Noeud*  instEcrire();  // <instEcrire>  ::= ecrire ( <expBool> | <chaine> { , <expBool> | <chaine> } )
+    Noeud*  instLire();    // <instLire>    ::= lire( <variable> {, <variable> } )
     
     // outils pour simplifier l'analyse syntaxique
     void tester (const string & symboleAttendu) const throw (SyntaxeException);   // Si symbole courant != symboleAttendu, on lève une exception
